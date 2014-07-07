@@ -50,28 +50,9 @@ module StateMachine
     #   class ActiveRecordVehicle < ActiveRecord::Base
     #   end
     #   
-    #   class DataMapperVehicle
-    #     include DataMapper::Resource
-    #   end
-    #   
-    #   class MongoidVehicle
-    #     include Mongoid::Document
-    #   end
-    #   
-    #   class MongoMapperVehicle
-    #     include MongoMapper::Document
-    #   end
-    #   
-    #   class SequelVehicle < Sequel::Model
-    #   end
-    #   
     #   StateMachine::Integrations.match(Vehicle)             # => nil
     #   StateMachine::Integrations.match(ActiveModelVehicle)  # => StateMachine::Integrations::ActiveModel
     #   StateMachine::Integrations.match(ActiveRecordVehicle) # => StateMachine::Integrations::ActiveRecord
-    #   StateMachine::Integrations.match(DataMapperVehicle)   # => StateMachine::Integrations::DataMapper
-    #   StateMachine::Integrations.match(MongoidVehicle)      # => StateMachine::Integrations::Mongoid
-    #   StateMachine::Integrations.match(MongoMapperVehicle)  # => StateMachine::Integrations::MongoMapper
-    #   StateMachine::Integrations.match(SequelVehicle)       # => StateMachine::Integrations::Sequel
     def self.match(klass)
       all.detect {|integration| integration.matches?(klass)}
     end
@@ -95,10 +76,6 @@ module StateMachine
     # 
     #   StateMachine::Integrations.find_by_name(:active_record) # => StateMachine::Integrations::ActiveRecord
     #   StateMachine::Integrations.find_by_name(:active_model)  # => StateMachine::Integrations::ActiveModel
-    #   StateMachine::Integrations.find_by_name(:data_mapper)   # => StateMachine::Integrations::DataMapper
-    #   StateMachine::Integrations.find_by_name(:mongoid)       # => StateMachine::Integrations::Mongoid
-    #   StateMachine::Integrations.find_by_name(:mongo_mapper)  # => StateMachine::Integrations::MongoMapper
-    #   StateMachine::Integrations.find_by_name(:sequel)        # => StateMachine::Integrations::Sequel
     #   StateMachine::Integrations.find_by_name(:invalid)       # => StateMachine::IntegrationNotFound: :invalid is an invalid integration
     def self.find_by_name(name)
       all.detect {|integration| integration.integration_name == name} || raise(IntegrationNotFound.new(name))
@@ -110,9 +87,7 @@ module StateMachine
     # == Example
     # 
     #   StateMachine::Integrations.all
-    #   # => [StateMachine::Integrations::ActiveRecord, StateMachine::Integrations::DataMapper
-    #   #     StateMachine::Integrations::Mongoid, StateMachine::Integrations::MongoMapper,
-    #   #     StateMachine::Integrations::Sequel, StateMachine::Integrations::ActiveModel]
+    #   # => [StateMachine::Integrations::ActiveRecord, StateMachine::Integrations::ActiveModel]
     def self.all
       constants = self.constants.map {|c| c.to_s}.select {|c| c != 'ActiveModel'}.sort << 'ActiveModel'
       constants.map {|c| const_get(c)}

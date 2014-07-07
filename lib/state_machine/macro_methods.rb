@@ -25,9 +25,9 @@ module StateMachine
     #   :turn_on_heater and :turn_off_heater for the :turn_on/:turn_off events).
     #   Default is nil.
     # * <tt>:integration</tt> - The name of the integration to use for adding
-    #   library-specific behavior to the machine.  Built-in integrations
-    #   include :active_model, :active_record, :data_mapper, :mongo_mapper, and
-    #   :sequel.  By default, this is determined automatically.
+    #   library-specific behavior to the machine.  Built-in integrations include
+    #   :active_model and :active_record By default, this is determined
+    #   automatically.
     # 
     # Configuration options relevant to ORM integrations:
     # * <tt>:plural</tt> - The pluralized version of the name.  By default, this
@@ -395,10 +395,7 @@ module StateMachine
     # 
     # For example,
     # 
-    #   class Vehicle
-    #     include DataMapper::Resource
-    #     property :id, Serial
-    #     
+    #   class Vehicle < ActiveRecord::Base
     #     state_machine :initial => :parked do
     #       event :ignite do
     #         transition :parked => :idling
