@@ -30,6 +30,10 @@ ActiveRecord::Base.logger = Logger.new("#{File.dirname(__FILE__)}/../../active_r
 
 module ActiveRecordTest
   class BaseTestCase < ActiveRecord::TestCase
+    setup do
+      I18n.reload!
+    end
+
     def default_test
     end
     
