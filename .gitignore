@@ -6,3 +6,4 @@ coverage/
 /doc/
 test/*.log
 /Gemfile.lock
+Vehicle_*_state.png

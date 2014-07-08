@@ -6,6 +6,8 @@
 
 This is a fork of [pluginaweek/state_machine](https://github.com/pluginaweek/state_machine), for the purpose of supporting a single application that needs features not present in the (currently unmaintained) trunk.
 
+To run the tests, you either need to use `env TRAVIS=1 bundle exec rake wwtd:local`, or install GraphViz first (eg. `brew install graphviz`) and run `bundle exec rake wwtd:local`.
+
 
 ## Resources
 

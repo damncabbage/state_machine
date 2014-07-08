@@ -1,11 +1,10 @@
 language: ruby
-script: "bundle exec rake appraisal:integration test"
+script: "bundle exec rake test"
 rvm:
   - 2.0.0
-env:
-  - INTEGRATION=default
-  - INTEGRATION=active_model
-  - INTEGRATION=active_record
+  - 2.1.0
+gemfile:
+  - "gemfiles/active_record_3.2.18.gemfile"
+  - "gemfiles/active_record_4.x.gemfile"
 notifications:
   disabled: true
-matrix:
